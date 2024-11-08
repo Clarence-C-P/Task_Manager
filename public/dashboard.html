@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <h1>User Dashboard</h1>
+    <div class="sidebar-welcome">
+        <h2>Hello, <span id="userEmail">[User's Email]</span>!</h2>
+    </div>
+
+    <!-- Motivational Greeting Section -->
+    <div class="greeting">
+        <p id="quote">Loading your daily motivation...</p>
+    </div>
+
+    <!-- Activity Tracker Section for Completed Tasks -->
+    <div class="activity-tracker">
+        <h3>Completed Tasks</h3>
+        <ul id="completedTasksList"></ul>
+    </div>
+
+    <!-- Task List Section -->
+    <div class="task-list">
+        <h3>Your Tasks</h3>
+        <input type="text" id="newTask" placeholder="Enter a new task" onkeydown="handleEnter(event)" />
+        <button onclick="addTask()">Add Task</button>
+        <ul id="taskList"></ul>
+    </div>
+
+    <!-- Logout Button -->
+    <a href="#" id="logoutLink" title="Logout"><span class="material-icons"></span> Logout</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchUserDetails();
+            fetchDailyQuote();
+            loadTasks();
+        });
+
+        async function fetchUserDetails() {
+            try {
+                const response = await fetch('/user-details', { credentials: 'include' });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user details.');
+                }
+                const data = await response.json();
+                if (data.success) {
+                    document.getElementById('userEmail').textContent = data.user.email;
+                } else {
+                    console.error('Failed to fetch user details:', data.message);
+                }
+            } catch (error) {
+                console.error('Error fetching user details:', error);
+            }
+        }
+
+        async function fetchDailyQuote() {
+            try {
+                const response = await fetch('https://api.quotable.io/random');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch quote.');
+                }
+                const data = await response.json();
+                document.getElementById('quote').textContent = `"${data.content}" - ${data.author}`;
+            } catch (error) {
+                document.getElementById('quote').textContent = 'Stay positive, work hard, make it happen!';
+                console.error('Error fetching quote:', error);
+            }
+        }
+
+        document.getElementById('logoutLink').addEventListener('click', function (event) {
+            event.preventDefault();
+            performLogout();
+        });
+
+        async function performLogout() {
+            try {
+                const response = await fetch('/logout', {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                if (response.ok) {
+                    window.location.href = 'index.html';
+                } else {
+                    console.error('Logout failed');
+                }
+            } catch (error) {
+                console.error('Error during logout:', error);
+            }
+        }
+
+        function handleEnter(event) {
+            if (event.key === "Enter") {
+                addTask();
+            }
+        }
+
+        function addTask() {
+            const taskText = document.getElementById('newTask').value;
+            if (taskText) {
+                const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+                tasks.push({ text: taskText, completed: false, completedAt: null });
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                loadTasks();
+                document.getElementById('newTask').value = '';
+            }
+        }
+
+        function loadTasks() {
+            const taskList = document.getElementById('taskList');
+            const completedTasksList = document.getElementById('completedTasksList');
+            taskList.innerHTML = '';
+            completedTasksList.innerHTML = '';
+
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.forEach((task, index) => {
+                const taskItem = document.createElement('li');
+                taskItem.className = task.completed ? 'completed' : '';
+
+                // Add task text and buttons
+                taskItem.innerHTML = `
+                    <span class="task-text">${task.text}</span>
+                    ${task.completed && task.completedAt ? `<span class="timestamp">${task.completedAt}</span>` : ""}
+                    ${task.completed ? `
+                        <button onclick="deleteTask(${index})">🗑️</button>
+                        <button onclick="retrieveTask(${index})">↩️</button>
+                    ` : `
+                        <button onclick="completeTask(${index})">✔️</button>
+                        <button onclick="deleteTask(${index})">❌</button>
+                    `}
+                `;
+
+                if (task.completed) {
+                    completedTasksList.appendChild(taskItem);
+                } else {
+                    taskList.appendChild(taskItem);
+                }
+            });
+        }
+
+        function completeTask(index) {
+            const tasks = JSON.parse(localStorage.getItem('tasks'));
+            tasks[index].completed = true;
+            tasks[index].completedAt = new Date().toLocaleString();
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            loadTasks();
+        }
+
+        function retrieveTask(index) {
+            const tasks = JSON.parse(localStorage.getItem('tasks'));
+            tasks[index].completed = false;
+            tasks[index].completedAt = null;
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            loadTasks();
+        }
+
+        function deleteTask(index) {
+            const tasks = JSON.parse(localStorage.getItem('tasks'));
+            tasks.splice(index, 1);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            loadTasks();
+        }
+    </script>
+</body>
+</html>

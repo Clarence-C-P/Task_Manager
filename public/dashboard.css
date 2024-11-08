@@ -1,0 +1,122 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1e1e2f;
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+    background-image: linear-gradient(135deg, #0f0f19 25%, #1e1e2f 25%, #1e1e2f 50%, #0f0f19 50%, #0f0f19 75%, #1e1e2f 75%, #1e1e2f 100%);
+    background-size: 150% 150%;
+    animation: backgroundAnimation 10s ease infinite;
+  }
+  /* Background Animation */
+  @keyframes backgroundAnimation {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 100% 100%; }
+  }
+  /* Sidebar and Logout */
+  .sidebar-welcome {
+    text-align: center;
+  }
+
+  h1 {
+  
+    color: #4bbf99; /* Soft teal */
+    text-align: center;
+    text-shadow: 2px 2px #003f33; /* Darker shadow for contrast */
+}
+
+/* Motivational Greeting Section */
+.greeting {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #4bbf99;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px auto;
+    text-align: center;
+    max-width: 400px;
+    font-style: italic;
+    color: #ffffff;
+}
+
+/* Activity Tracker Section */
+.activity-tracker, .task-list {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #4bbf99;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+.activity-tracker h3, .task-list h3 {
+    color: #4bbf99;
+    margin-bottom: 10px;
+}
+
+
+  #logoutLink {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #ff6b6b;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+#logoutLink:hover {
+    background-color: #e25858;
+}
+  
+  /* Task List Styling */
+  .task-list ul, .activity-tracker ul {
+      list-style-type: none;
+      padding: 0;
+  }
+  
+  .task-list li, .activity-tracker li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.2);
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 5px;
+      color: #ffffff;
+  }
+  
+  .task-list .task-text, .activity-tracker .task-text {
+      flex-grow: 1;
+      text-align: left;
+      padding-right: 10px;
+  }
+  
+  .task-list button, .activity-tracker button {
+      background-color: #4bbf99;
+      border: none;
+      border-radius: 5px;
+      color: #ffffff;
+      cursor: pointer;
+      padding: 5px 10px;
+      margin-left: 5px;
+  }
+  
+  .task-list button:hover, .activity-tracker button:hover {
+      background-color: #37a78b;
+  }
+  
+  /* Completed Task Styling */
+  .completed {
+      text-decoration:solid;
+      color: #aaaaaa;
+  }
+  
+  /* Timestamp Styling */
+  .timestamp {
+      font-size: 0.9em;
+      color: #aaaaaa;
+      margin-left: 10px;
+  }
+  

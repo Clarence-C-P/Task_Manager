@@ -1,0 +1,172 @@
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #1e1e2f; /* Dark blue background */
+  color: #ffffff; /* White text */
+  margin: 0;
+  padding: 20px;
+  background-image: linear-gradient(135deg, #0f0f19 25%, #1e1e2f 25%, #1e1e2f 50%, #0f0f19 50%, #0f0f19 75%, #1e1e2f 75%, #1e1e2f 100%);
+  background-size: 150% 150%;
+  
+  animation: backgroundAnimation 10s ease infinite; /* Animated background */
+}
+  @keyframes backgroundAnimation {
+  
+  0% { background-position: 0% 0%; }
+  
+  100% {background-position: 100% 100%; }
+  
+  }
+  
+  h1 {
+  
+  color: #4bbf99; /* Soft teal */
+  
+  text-align: center;
+  
+  text-shadow: 2px 2px #003f33; /* Darker shadow for contrast */
+  
+  }
+  
+  .form-container {
+  
+  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent form background */
+  border: 2px solid #4bbf99; /* Soft teal border */
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  max-width: 400px;
+  
+  margin: auto;
+  
+  }
+  
+  label {
+  
+  display: block;
+  
+  margin-bottom: 5px;
+  
+  font-weight: bold;
+  
+  color: #ffffff; /* White label */
+  
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #4bbf99; /* Soft teal border */
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2); /* Light transparent background */
+  color: #ffffff; /* White text */
+  font-size: 1em;
+  box-sizing: border-box;
+  position: relative;
+  }
+  
+/* Password Toggle Container */
+.password-toggle {
+  display: flex;
+  align-items: center; /* Vertically centers the icon with the input field */
+  position: relative;
+}
+
+/* Password Input Field */
+.password-toggle input[type="password"],
+.password-toggle input[type="text"] {
+  width: 100%; /* Ensures the input takes up the full width */
+  padding: 12px 30px 12px 12px; /* Adds extra padding to the right for the icon */
+  border: 1px solid #4bbf99; /* Adds border to the input */
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2); /* Light transparent background */
+  color: #ffffff;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+/* Toggle Icon Styling */
+.password-toggle-icon {
+  position: absolute;
+  right: 10px; /* Adjusts the icon to the right of the input */
+  margin-top: -15px; /* Adjusts the icon to the right of the input */
+  cursor: pointer;
+  color: #aaa; /* Matches the teal color */
+  font-size: 1em; /* Increases size for better clickability */
+  z-index: 1; /* Makes sure the icon is above the input */
+}
+
+
+  button {
+  
+  background-color: #4bbf99; /* Soft teal button */
+  
+  color: #ffffff;
+  
+  border: none;
+  
+  padding: 10px;
+  
+  border-radius: 5px;
+  
+  cursor: pointer;
+  width: 100%;
+
+font-weight: bold;
+
+}
+
+button:hover {
+
+background-color: #37a78b; /* Darker teal on hover */
+
+}
+
+a {
+
+color: #4bbf99; /* Soft teal links */
+
+text-align: center;
+
+display: block;
+
+margin-top: 10px;
+
+}
+
+a:hover {
+
+text-decoration: underline;
+
+}
+/* Footer Links */
+.footer {
+  text-align: center;
+  margin-top: 10px;
+  display: flex; /* Use flexbox to align items in a row */
+  justify-content: center; /* Centers the content horizontally */
+  align-items: center; /* Vertically center the content */
+  gap: 15px; /* Adds space between the elements */
+}
+
+.footer p {
+  margin: 0; /* Remove default margin from the paragraph */
+  font-size: 1em; /* Adjust font size if needed */
+  display: inline-flex; /* Align the p and a tag inline */
+}
+
+.footer a {
+  color: #4bbf99; /* Soft teal for the link */
+  text-decoration: none;
+  font-size: 1em;
+  margin-top: -1px;
+  margin-left: 10px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
