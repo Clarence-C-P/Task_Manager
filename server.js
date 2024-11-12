@@ -20,23 +20,26 @@ const database = client.db("test"); // Replace "myDatabase" with your database n
 let usersCollection;
 usersCollection = database.collection("users"); // Replace "tblUser" with your collection name
 
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(helmet());
-
-
+app.use(cors());
 
 async function connectToDatabase() {
-try {
-await client.connect();
-console.log('Connected to MongoDB');
-const database = client.db('myDatabase');
-usersCollection = database.collection('tblUser');
-} catch (err) {
-console.error('Failed to connect to MongoDB', err);
-process.exit(1);
-}
+    try {
+        await client.connect();
+        console.log('Connected to MongoDB');
+        const database = client.db('test');
+        usersCollection = database.collection('users');
+    } catch (err) {
+        console.error('Failed to connect to MongoDB', err);
+        process.exit(1);
+    }
 }
 connectToDatabase();
 
@@ -70,10 +73,7 @@ const Token = mongoose.model('Token', tokenSchema);
 // Configure SendGrid API Key
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(express.static('public'));
+
 
 // Hash Password Function
 function hashPassword(password) {
