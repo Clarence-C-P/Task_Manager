@@ -46,14 +46,9 @@ async function connectToDatabase() {
 connectToDatabase();
 
 // MongoDB connection using the URI from .env
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log('Connected to MongoDB');
-}).catch((error) => {
-    console.error('MongoDB connection error:', error);
-});
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((error) => console.error('MongoDB connection error:', error));
 
 // User Schema
 const userSchema = new mongoose.Schema({
