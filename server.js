@@ -14,7 +14,7 @@ const bcrypt = require('bcrypt');
 const { MongoClient } = require('mongodb');
 const app = express();
 const PORT = process.env.PORT || 3000;
-const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://dclarence322:COFFEELOVER2024@cluster0.xh3hj.mongodb.net/'; // Use your MongoDB URI
+const mongoUri = process.env.MONGODB_URI || "mongodb+srv://dclarence322:COFFEELOVER2024@cluster0.xh3hj.mongodb.net/"; // Use your MongoDB URI
 const client = new MongoClient(mongoUri);
 const database = client.db("test"); // Replace "myDatabase" with your database name
 let usersCollection;
