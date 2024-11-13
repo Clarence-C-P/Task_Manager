@@ -17,6 +17,27 @@ body {
   100% {background-position: 100% 100%; }
   
   }
+
+h1 {
+  color: #4bbf99;
+  text-align: center;
+  text-shadow: 2px 2px #003f33;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+form {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid #4bbf99;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  box-sizing: border-box;
+}
+
   
   h1 {
   
