@@ -20,7 +20,7 @@ const database = client.db("test"); // Replace "myDatabase" with your database n
 let usersCollection;
 usersCollection = database.collection("users"); // Replace "tblUser" with your collection name
 
-app.set('trust proxy', true);
+
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
