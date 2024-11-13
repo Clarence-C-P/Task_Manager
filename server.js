@@ -267,13 +267,15 @@ app.use(session({
 
 
 const loginLimiter = rateLimit({
-    windowMs: 30 * 60 * 1000, // 30 minutes
-    max: 5, // Limit each IP to 5 requests per windowMs
-    message: 'Too many login attempts, please try again after 30 minutes.',
+    windowMs: 30 * 1000, // 30 seconds
+    max: 30, // Limit each IP to 30 requests per windowMs (1 request per second)
+    message: 'Too many login attempts, please try again after 30 seconds.',
     handler: function (req, res, next, options) {
-    res.status(options.statusCode).json({ success: false, message: options.message });
-    }
-    });
+        res.status(options.statusCode).json({ success: false, message: options.message });
+    },
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false,  // Disable the `X-RateLimit-*` headers
+});
      
 app.post('/login', loginLimiter, async (req, res) => {
     const { email, password } = req.body;
